@@ -17,9 +17,15 @@
 <div id="app">
     <header>
         <img src="image/logo.png" width="80">
-        <h1 v-html="name.toUpperCase()"></h1>
-
+        <h1 v-html="bilangan"></h1>
+        <p>Bilangan ini adalah bilangan {{ infoBilangan }}</p>
+        <p>
+            <!-- v-on:click="handleClick()" atau @click="handleClick()" -->
+            <button v-on:click="handleClick()">Ditekan</button>
+        </p>
+        <!-- v-bind:src="gambar" atau :src="gambar"       -->
         <img v-bind:src="gambar" width="500">
+
         <p>The Progressive JavaScript Framework</p>
     </header>
 
@@ -49,6 +55,8 @@
      * kelebihan directive kita bisa manipulasi setiap datanya dengan expression sperti contoh di bawah
      * v-html="bilangan * 2" ==> 98
      * v-html="name.toUpperCase()" ==> BUDHI OCT 22
+     *
+     * event adalah yang di lakukan seperti DOM Javascript
      */
 
         // data
@@ -74,6 +82,10 @@
             ubahname: function (newName) {
                 this.name = newName;
                 return this.getname();
+            },
+            handleClick: function () {
+                this.bilangan++;
+                this.gambar = "image/lfc.png";
             }
         },
         computed: {
