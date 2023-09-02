@@ -13,16 +13,33 @@
 </head>
 <body>
 
-<header>
-    <img src="image/logo.png" width="80">
-    <h1>What is Vue.js</h1>
-    <p>The Progressive JavaScript Framework</p>
-</header>
+<!-- div ini akan menjadi wadah compoentn vue js-->
+<div id="app">
+    <header>
+        <img src="image/logo.png" width="80">
+        <h1>What is Vue.js</h1>
+        <p>The Progressive JavaScript Framework</p>
+    </header>
 
-<footer id="footer">
-    <p>copyright 2023</p>
-</footer>
+    <footer id="footer">
+        <p>copyright 2023</p>
+    </footer>
 
+</div>
 
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<script>
+    /**
+     * Vue Js code disini
+     * dalam object{} Vue
+     * key pertama el ==> yang menentukan element mana sebagai system component dari view nyaa.. akan kita jadikan wadah component
+     * untuk get id atau class dari wadah component.. id = #app atau class = .app
+     */
+
+    const vm = new Vue({
+        el: "#app"
+    }); // instance
+</script>
 </body>
 </html>
