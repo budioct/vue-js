@@ -23,7 +23,16 @@
 <div id="app">
     <header>
         <img src="image/logo.png" width="80">
-        <h1 v-html="bilangan"></h1>
+        <h1 v-text="name"></h1>
+        <input type="text" v-model="name">
+
+        <p>{{ kelas }}</p>
+        <div>
+            <label><input type="checkbox" value="React" v-model="kelas"> React</label>
+            <label><input type="checkbox" value="Vuejs" v-model="kelas"> Vuejs</label>
+            <label><input type="checkbox" value="Angular" v-model="kelas"> Angular</label>
+        </div>
+
         <p>Bilangan ini adalah bilangan {{ infoBilangan }}</p>
         <p>
             <!-- v-on:click="handleClick()" atau @click="handleClick()" -->
@@ -68,6 +77,8 @@
      * v-html="name.toUpperCase()" ==> BUDHI OCT 22
      *
      * event adalah yang di lakukan seperti DOM Javascript
+     *
+     * two way data binding adalah menggunakan v-model untuk membuat biding data dengan dua arah.. digunakan element input input lainya
      */
 
         // data
@@ -80,7 +91,8 @@
             bilangan: 49,
             link: "<a href=''>goal.com/id</a>",
             gambar: "image/vue.png",
-            menu: "home"
+            menu: "home",
+            kelas: []
         }; // set data
 
     // object vue js
