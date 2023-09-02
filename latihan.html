@@ -40,6 +40,8 @@
         <ul v-if="kelas.length > 1">
             <li v-for="(item, index) of kelas">{{index + 1}} - {{item}}</li>
         </ul>
+        <li v-else>Kelas Belum Tersedia</li>
+
         <p>{{ kelas }}</p>
         <div>
             <label><input type="checkbox" value="React" v-model="kelas"> React</label>

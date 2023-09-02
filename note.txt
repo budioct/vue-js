@@ -9,3 +9,4 @@ v-on:click = digunakan event listener yang user lakukan, (javascript DOM)
 v-model = diguanakn untuk membuat biding data dengan dua arah.. digunakan pada element html input inputan lainya
 v-for = digunakan untuk loop statement array[] atau object{}.. kita bisa menggunakan forin atau forof
 v-if = digunakan untuk percabangan.. kita bisa menggunakan jika kondisinya terpenuhi, untuk menyembuyikan modal, text jika sesuatu hal itu memenuhi kondisi
+v-else = digunakan untuk percabangan.. digunakan jika kondisinya tidak terpenuhi
