@@ -17,7 +17,7 @@
 <div id="app">
     <header>
         <img src="image/logo.png" width="80">
-        <h1 v-once>{{ name }}</h1>
+        <h1 v-once>{{ isActive ? name.toUpperCase() : "data not found" }}</h1>
         <p>The Progressive JavaScript Framework</p>
     </header>
 
@@ -43,7 +43,8 @@
         // data
     const member = {
             name: "budhi oct 22",
-            message: "Hello World!"
+            message: "Hello World!",
+            isActive: true
         }; // set data
 
     const vm = new Vue({
