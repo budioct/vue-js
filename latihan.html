@@ -17,7 +17,8 @@
 <div id="app">
     <header>
         <img src="image/logo.png" width="80">
-        <h1>{{ namaLengkap }}</h1>
+        <h1>{{ bilangan }}</h1>
+        <p>Bilangan ini adalah bilangan {{ infoBilangan }}</p>
         <p>The Progressive JavaScript Framework</p>
     </header>
 
@@ -41,7 +42,7 @@
      *
      * key method untuk menaruh semua method pada object vue.. key word this. selalu mengacu pada object new Vue()
      *
-     * computed property berbentuk method, value tergantung dari propery lainya
+     * computed property berbentuk method, value tergantung dari propery lainya.. intinya bisa mensederhanakan di dalam method
      */
 
         // data
@@ -50,7 +51,8 @@
             message: "Hello World!",
             isActive: true,
             quantity: 7,
-            fullName: "budhi octaviansyah"
+            fullName: "budhi octaviansyah",
+            bilangan: 49
         }; // set data
 
     // object vue js
@@ -72,6 +74,9 @@
             },
             namaLengkap: function () {
                 return this.fullName;
+            },
+            infoBilangan : function (){
+                return this.bilangan % 2 === 0 ? "Genap" : "Ganjil"
             }
         }
     }); // instance
