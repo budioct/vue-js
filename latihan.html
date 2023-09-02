@@ -17,7 +17,7 @@
 <div id="app">
     <header>
         <img src="image/logo.png" width="80">
-        <h1>What is Vue.js</h1>
+        <h1 v-once>{{ name }}</h1>
         <p>The Progressive JavaScript Framework</p>
     </header>
 
@@ -37,6 +37,7 @@
      * untuk get id atau class dari wadah component.. id = #app atau class = .app
      *
      * key data untuk // string, number, boolean, array, object
+     * untuk mengakses data dari object vue di element html dengan interpolation/ekpression/mustache {{ key object}}
      */
 
         // data

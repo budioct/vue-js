@@ -1,0 +1,3 @@
+kumpulan catatan attribute element html
+
+v-once = attribute supaya isi content tidak bisa di manipulasi
