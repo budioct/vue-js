@@ -10,3 +10,4 @@ v-model = diguanakn untuk membuat biding data dengan dua arah.. digunakan pada e
 v-for = digunakan untuk loop statement array[] atau object{}.. kita bisa menggunakan forin atau forof
 v-if = digunakan untuk percabangan.. kita bisa menggunakan jika kondisinya terpenuhi, untuk menyembuyikan modal, text jika sesuatu hal itu memenuhi kondisi
 v-else = digunakan untuk percabangan.. digunakan jika kondisinya tidak terpenuhi
+v-show = untuk menambahkan atau menghilangkan element html. tetapi tidak bisa di sandingkan dengan directive v-else.. untuk manipulasi kecil menghilangkan gambar, loading web

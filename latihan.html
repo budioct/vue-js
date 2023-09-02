@@ -37,10 +37,11 @@
         </ul>
 
         <h3>Total Kelas {{kelas.length}}</h3>
-        <ul v-if="kelas.length > 1">
-            <li v-for="(item, index) of kelas">{{index + 1}} - {{item}}</li>
+        <!-- <ul v-if="kelas.length > 1">-->
+        <ul v-show="kelas.length > 1">
+        <li v-for="(item, index) of kelas">{{index + 1}} - {{item}}</li>
         </ul>
-        <li v-else>Kelas Belum Tersedia</li>
+        <!-- <li v-else>Kelas Belum Tersedia</li>-->
 
         <p>{{ kelas }}</p>
         <div>
