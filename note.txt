@@ -4,3 +4,4 @@ kumpulan catatan attribute element html
 v-once = attribute supaya isi content tidak bisa di manipulasi
 v-text = binding object data pada vue / mendapatkan data
 v-html = mendapatkan data dan juga bisa menerima value bentuk element html --> link: "<a href=''>goal.com/id</a>"
+v-bind:src = mendapatkan resource file dari project.. set --> gambar: "image/vue.png", get --> v-bind:src="gambar"

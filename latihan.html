@@ -18,6 +18,8 @@
     <header>
         <img src="image/logo.png" width="80">
         <h1 v-html="name.toUpperCase()"></h1>
+
+        <img v-bind:src="gambar" width="500">
         <p>The Progressive JavaScript Framework</p>
     </header>
 
@@ -57,7 +59,8 @@
             quantity: 7,
             fullName: "budhi octaviansyah",
             bilangan: 49,
-            link: "<a href=''>goal.com/id</a>"
+            link: "<a href=''>goal.com/id</a>",
+            gambar: "image/vue.png"
         }; // set data
 
     // object vue js
