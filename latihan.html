@@ -9,6 +9,11 @@
             margin: 5%;
             font-family: 'Quicksand', sans-serif;
         }
+        .active {
+            background: salmon;
+            border: 0;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
@@ -27,6 +32,11 @@
         <img v-bind:src="gambar" width="500">
 
         <p>The Progressive JavaScript Framework</p>
+
+        <!-- studi kasus class binding -->
+        <button class="active">Home</button>
+        <button>About</button>
+        <button>Blog</button>
     </header>
 
     <footer id="footer">
