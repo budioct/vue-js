@@ -31,6 +31,11 @@
             <li v-for="x in 5">{{ x }}</li>
         </ul>
 
+        <h3>mencari bilangan genap: {{ numbers }}</h3>
+        <ul>
+            <li v-for="x in cariBilanganGenap(numbers)">{{ x }}</li>
+        </ul>
+
         <ul>
             <li v-for="(item, index) of kelas">{{index + 1}} - {{item}}</li>
         </ul>
@@ -100,7 +105,8 @@
             link: "<a href=''>goal.com/id</a>",
             gambar: "image/vue.png",
             menu: "home",
-            kelas: ["Java", "Golang", "Javacript", "PHP"]
+            kelas: ["Java", "Golang", "Javacript", "PHP"],
+            numbers: [1, 2, 3, 4, 5]
         }; // set data
 
     // object vue js
@@ -118,6 +124,11 @@
             handleClick: function () {
                 this.bilangan++;
                 this.gambar = "image/lfc.png";
+            },
+            cariBilanganGenap: (param) => {
+                return param.filter(angka => {
+                    return angka % 2 === 0
+                });
             }
         },
         computed: {
