@@ -17,7 +17,7 @@
 <div id="app">
     <header>
         <img src="image/logo.png" width="80">
-        <h1 v-once>{{ getname() }}</h1>
+        <h1>{{ getname() }}</h1>
         <p>The Progressive JavaScript Framework</p>
     </header>
 
@@ -47,12 +47,17 @@
             isActive: true
         }; // set data
 
+    // object vue js
     const vm = new Vue({
         el: "#app",
         data: member,
         methods: {
             getname: function () {
                 return `Hello ${this.name}`;
+            },
+            ubahname: function (newName) {
+                this.name = newName;
+                return this.getname();
             }
         }
     }); // instance
