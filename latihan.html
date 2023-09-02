@@ -17,7 +17,7 @@
 <div id="app">
     <header>
         <img src="image/logo.png" width="80">
-        <h1 v-once>{{ isActive ? name.toUpperCase() : "data not found" }}</h1>
+        <h1 v-once>{{ getname() }}</h1>
         <p>The Progressive JavaScript Framework</p>
     </header>
 
@@ -49,7 +49,12 @@
 
     const vm = new Vue({
         el: "#app",
-        data: member
+        data: member,
+        methods: {
+            getname: function () {
+                return `Hello ${this.name}`;
+            }
+        }
     }); // instance
 </script>
 </body>
