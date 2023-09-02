@@ -9,6 +9,7 @@
             margin: 5%;
             font-family: 'Quicksand', sans-serif;
         }
+
         .active {
             background: salmon;
             border: 0;
@@ -33,10 +34,10 @@
 
         <p>The Progressive JavaScript Framework</p>
 
-        <!-- studi kasus class binding -->
-        <button class="active">Home</button>
-        <button>About</button>
-        <button>Blog</button>
+        <!-- studi kasus class binding.. pada saat navbar di click maka v-on:click akan assagiement key menu dan assaigment dengan value yang sudah di set-->
+        <button v-bind:class="{active: menu === 'home'}" v-on:click="menu = 'home'">Home</button>
+        <button v-bind:class="{active: menu === 'about'}" v-on:click="menu = 'about'"> About</button>
+        <button v-bind:class="{active: menu === 'blog'}" v-on:click="menu = 'blog'">Blog</button>
     </header>
 
     <footer id="footer">
@@ -78,7 +79,8 @@
             fullName: "budhi octaviansyah",
             bilangan: 49,
             link: "<a href=''>goal.com/id</a>",
-            gambar: "image/vue.png"
+            gambar: "image/vue.png",
+            menu: "home"
         }; // set data
 
     // object vue js
