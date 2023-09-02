@@ -37,11 +37,13 @@
         </ul>
 
         <h3>Total Kelas {{kelas.length}}</h3>
-        <!-- <ul v-if="kelas.length > 1">-->
-        <ul v-show="kelas.length > 1">
-        <li v-for="(item, index) of kelas">{{index + 1}} - {{item}}</li>
-        </ul>
-        <!-- <li v-else>Kelas Belum Tersedia</li>-->
+        <template>
+            <!--  <ul v-show="kelas.length > 1">-->
+            <ul v-if="kelas.length > 1">
+                <li v-for="(item, index) of kelas">{{index + 1}} - {{item}}</li>
+            </ul>
+            <li v-else>Kelas Belum Tersedia</li>
+        </template>
 
         <p>{{ kelas }}</p>
         <div>
@@ -96,6 +98,8 @@
      * event adalah yang di lakukan seperti DOM Javascript
      *
      * two way data binding adalah menggunakan v-model untuk membuat biding data dengan dua arah.. digunakan element input input lainya
+     *
+     * element <template> adalah sebuah wrapper untuk mengkelompokan beberapa element html sekaligus. digunakan untuk kondisional
      */
 
         // data
