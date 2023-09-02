@@ -17,7 +17,7 @@
 <div id="app">
     <header>
         <img src="image/logo.png" width="80">
-        <h1>{{ getname() }}</h1>
+        <h1>{{ namaLengkap }}</h1>
         <p>The Progressive JavaScript Framework</p>
     </header>
 
@@ -38,13 +38,19 @@
      *
      * key data untuk // string, number, boolean, array, object
      * untuk mengakses data dari object vue di element html dengan interpolation/ekpression/mustache {{ key object}}
+     *
+     * key method untuk menaruh semua method pada object vue.. key word this. selalu mengacu pada object new Vue()
+     *
+     * computed property berbentuk method, value tergantung dari propery lainya
      */
 
         // data
     const member = {
             name: "budhi oct 22",
             message: "Hello World!",
-            isActive: true
+            isActive: true,
+            quantity: 7,
+            fullName: "budhi octaviansyah"
         }; // set data
 
     // object vue js
@@ -58,6 +64,14 @@
             ubahname: function (newName) {
                 this.name = newName;
                 return this.getname();
+            }
+        },
+        computed: {
+            totalBayar: function () {
+                return this.quantity * 10000;
+            },
+            namaLengkap: function () {
+                return this.fullName;
             }
         }
     }); // instance
