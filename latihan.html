@@ -26,6 +26,10 @@
         <h1 v-text="name"></h1>
         <input type="text" v-model="name">
 
+        <ul>
+            <li v-for="item in kelas" v-text="item"></li>
+        </ul>
+
         <p>{{ kelas }}</p>
         <div>
             <label><input type="checkbox" value="React" v-model="kelas"> React</label>
@@ -92,7 +96,7 @@
             link: "<a href=''>goal.com/id</a>",
             gambar: "image/vue.png",
             menu: "home",
-            kelas: []
+            kelas: ["Java", "Golang", "Javacript", "PHP"]
         }; // set data
 
     // object vue js

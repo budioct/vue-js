@@ -7,3 +7,4 @@ v-html = mendapatkan data dan juga bisa menerima value bentuk element html --> l
 v-bind:src = mendapatkan resource file dari project.. set --> gambar: "image/vue.png", get --> v-bind:src="gambar"
 v-on:click = digunakan event listener yang user lakukan, (javascript DOM)
 v-model = diguanakn untuk membuat biding data dengan dua arah.. digunakan pada element html input inputan lainya
+v-for = digunakan untuk loop statement array[] atau object{}.. kita bisa menggunakan forin atau forof
