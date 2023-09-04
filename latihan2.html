@@ -20,6 +20,7 @@
 <body>
 
 <!-- div ini akan menjadi wadah compoentn vue js-->
+<!-- div ini akan menjadi wadah compoentn vue js super component-->
 <div id="app">
 
     <!-- memangil component yang sudah di buat vue js-->
@@ -29,7 +30,7 @@
 
     <main>
         <!-- memangil component yang sudah di buat vue js-->
-        <kelas/>
+        <kelas v-bind:items="kelas" :input="kelasBaru"/>
     </main>
 
     <!-- memangil component yang sudah di buat vue js-->
@@ -102,17 +103,18 @@
     });
 
     Vue.component("kelas", {
+        props: ["items", "input"],
         template: `
           <div>
           <h3>Tambah Kelas.</h3>
-          <p><input type="text" placeholder="Nama Kelas" v-on:keyup.enter="submit" v-model="kelasBaru"></p>
+          <p><input type="text" placeholder="Nama Kelas" v-on:keyup.enter="submit" v-model="input"></p>
 
           <hr>
-          <h3>Total Kelas {{ kelas.length }}</h3>
-          <template v-if="kelas.length > 1">
+          <h3>Total Kelas {{ items.length }}</h3>
+          <template v-if="items.length > 1">
             <!--  <ul v-show="kelas.length > 1">-->
             <ul>
-              <li v-for="(item, index) of kelas">{{ index + 1 }} - {{ item }}</li>
+              <li v-for="(item, index) of items">{{ index + 1 }} - {{ item }}</li>
             </ul>
             <li v-else>Kelas Belum Tersedia</li>
           </template>
@@ -120,8 +122,7 @@
         `,
         data: function () {
             return {
-                kelas: ["Java", "Golang", "Javacript", "PHP"],
-                kelasBaru: ""
+
             }
         },
         methods: {
@@ -135,7 +136,10 @@
     });
 
     // data
-    const member = {}; // set data
+    const member = {
+        kelas: ["Java", "Golang", "Javacript", "PHP"],
+        kelasBaru: ""
+    }; // set data
 
     // object vue js
     const vm = new Vue({
