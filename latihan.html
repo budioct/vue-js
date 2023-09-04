@@ -69,12 +69,10 @@
 
         <p>
             <!-- studi kasus penggunaan object event-->
-            <!-- dalam penggunakan ini page link menu akan redirect/reload berarti ini sudah benar dalam implementasinya.-->
-            <!-- ini terjadi karena mempunya sifat bawaan dari element tag a. kita bisa menonaktigkan-->
-            <!-- kita bisa me-non-aktifkan sifat bawaan dari element html. dengan param tambahan $event di function-->
-            <a v-bind:class="{active: menu === 'home'}" href="#" v-on:click="gantiMenu('home', $event)">Home</a>
-            <a v-bind:class="{active: menu === 'about'}" href="#" v-on:click="gantiMenu('about', $event)"> About</a>
-            <a v-bind:class="{active: menu === 'blog'}" href="#" v-on:click="gantiMenu('blog', $event)">Blog</a>
+            <!-- penulisan yang lebih elegan dalam penggunakan object event, tambahkan .prevent dalan directive vue-js. otomatis method preventDefault() aktif -->
+            <a v-bind:class="{active: menu === 'home'}" href="#" v-on:click.prevent="gantiMenu('home')">Home</a>
+            <a v-bind:class="{active: menu === 'about'}" href="#" v-on:click.prevent="gantiMenu('about')"> About</a>
+            <a v-bind:class="{active: menu === 'blog'}" href="#" v-on:click.prevent="gantiMenu('blog')">Blog</a>
         </p>
     </header>
 
@@ -148,9 +146,9 @@
                     return angka % 2 === 0
                 });
             },
-            gantiMenu: function (param, event) {
-                event.preventDefault(); // preventDefault() mencegah fungsi element html di non-aktifkan. suapaya perintah vue js di eksekusi dengan baik.. tidak melakukan redirect/reload
-                console.info(event);
+            gantiMenu: function (param) {
+                //event.preventDefault(); // preventDefault() mencegah fungsi element html di non-aktifkan. suapaya perintah vue js di eksekusi dengan baik.. tidak melakukan redirect/reload
+                //console.info(event);
                 this.menu = param;
             }
         },
