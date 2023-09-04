@@ -30,7 +30,8 @@
 
     <main>
         <!-- memangil component yang sudah di buat vue js-->
-        <kelas v-bind:items="kelas" :input="kelasBaru"> </kelas>
+        <!-- menambahkan event berbentuk props.. ketika event listener maka akan redering $emit('hapusKelas') -->
+        <kelas v-bind:items="kelas" v-on:submitkelas="submitkelas" v-on:hapuskelas="hapuskelas($event)"></kelas>
         <home></home>
     </main>
 
@@ -72,7 +73,11 @@
      * note: components yang telah dibuat cara membuatnya harus sebelum instance object id #app supaya bisa di tampilkan/reader oleh instance Object vue id=app
      *
      * props adalah parsing data dari child component, costume attribute yang bisa di daftarkan pada suatu component, pada suatu value yang di kirimkan ke prosp maka value tersebut menjadi child component
+     * komunikasi dari component parent ke compoent child
      *
+     * $emit(param) digunakan untuk dari component child komunikasi kepada component parent
+     * contoh kasus: jadi component child ingin menghapus data, tetapi data tersebut ada di component parent, maka mau tidak mau component child harus izin ke component parent.
+     * untuk itu kita menggunakan $emit() untuk berkomunikasi dari component child ke component parent
      */
 
     // membuat component(param, object)
@@ -108,17 +113,20 @@
         template: `
           <div>
           <h3>Tambah Kelas.</h3>
-          <p><input type="text" placeholder="Nama Kelas" v-on:keyup.enter="submit" v-model="input"></p>
+          <p><input type="text" placeholder="Nama Kelas" v-on:keyup.enter="$emit('submitkelas', $event)" ></p>
 
           <hr>
           <h3>Total Kelas {{ items.length }}</h3>
-          <template v-if="items.length > 1">
+          <template v-if="items.length">
             <!--  <ul v-show="kelas.length > 1">-->
             <ul>
-              <li v-for="(item, index) of items">{{ index + 1 }} - {{ item }}</li>
+              <li v-for="(item, index) of items">
+                {{ index + 1 }} - {{ item }}
+                <a href="" v-on:click.prevent="$emit('hapuskelas', index)">hapus</a>
+              </li>
             </ul>
-            <li v-else>Kelas Belum Tersedia</li>
           </template>
+          <li v-else>Kelas Belum Tersedia.,</li>
           </div>
         `,
         data: function () {
@@ -153,7 +161,17 @@
           "home": Home
         },
         data: member,
-        methods: {},
+        methods: {
+            hapuskelas: function (index) {
+                // console.info(`${index}`);
+                this.kelas.splice(index, 1); // akses component class lalu splice(cari index, 1(hapus 1 elemet dari array tersebut))
+            },
+            submitkelas: function (event){
+                // console.info(event);
+                const text = event.target.value; // get value text dari component child
+                this.kelas.unshift(text); // unshift() add array dari depan
+            }
+        },
         computed: {}
     }); // instance
 
