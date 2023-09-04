@@ -25,14 +25,25 @@
 
     <!-- memangil component yang sudah di buat vue js-->
     <header-component nama="Vuejs" gambar="image/logo.png"></header-component>
-    <header-component nama="lfc" gambar="image/lfc.png"></header-component>
-    <header-component nama="lfc" gambar="image/vue.png"></header-component>
+<!--    <header-component nama="lfc" gambar="image/lfc.png"></header-component>-->
+<!--    <header-component nama="lfc" gambar="image/vue.png"></header-component>-->
+    
+    <nav>
+        <!-- navbar yang sudah di set sedemikian yang sudah di set object VueRouter-->
+        <router-link to="/">Home</router-link>
+        <router-link to="/about">About</router-link>
+        <router-link to="/kelas">Kelas</router-link>
+    </nav>
 
     <main>
         <!-- memangil component yang sudah di buat vue js-->
         <!-- menambahkan event berbentuk props.. ketika event listener maka akan redering $emit('hapusKelas') -->
-        <kelas v-bind:items="kelas" v-on:submitkelas="submitkelas" v-on:hapuskelas="hapuskelas($event)"></kelas>
-        <home></home>
+<!--        <kelas v-bind:items="kelas" v-on:submitkelas="submitkelas" v-on:hapuskelas="hapuskelas($event)"></kelas>-->
+<!--        <home></home>-->
+<!--        <about></about>-->
+
+        <!-- akan menampilkan dan mencocokan dengan route url yang ada di registrasi-->
+        <router-view v-bind:items="kelas" v-on:submitkelas="submitkelas" v-on:hapuskelas="hapuskelas($event)"></router-view>
     </main>
 
     <!-- memangil component yang sudah di buat vue js-->
@@ -43,6 +54,8 @@
 
 <!--<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+<script src="https://unpkg.com/vue-router@3"></script>
+<script src="https://unpkg.com/vuex@3"></script>
 <script>
     /**
      * Vue Js code disini
@@ -83,6 +96,8 @@
      *
      * sebuah content html bisa di masukan ke dalam component: <footer-component>content bro</>footer-component>
      * nanti di file component kita tinggal <slot></slot> untuk mengambil content menjadi bagian component
+     *
+     * router supaya kita bisa membuat signle page application
      */
 
     // membuat component(param, object)
@@ -90,7 +105,7 @@
         props: ["nama", "gambar"],
         template: `
           <header>
-<!--          <img src="image/logo.png" width="100">-->
+          <!--          <img src="image/logo.png" width="100">-->
           <img v-bind:src="gambar" width="100">
 
           <p>{{ "Hello " + nama }}</p>
@@ -113,12 +128,60 @@
         `
     });
 
-    Vue.component("kelas", {
+    // Vue.component("kelas", {
+    //     props: ["items", "input"],
+    //     template: `
+    //       <div>
+    //       <h3>Tambah Kelas.</h3>
+    //       <p><input type="text" placeholder="Nama Kelas" v-on:keyup.enter="$emit('submitkelas', $event)"></p>
+    //
+    //       <hr>
+    //       <h3>Total Kelas {{ items.length }}</h3>
+    //       <template v-if="items.length">
+    //         <!--  <ul v-show="kelas.length > 1">-->
+    //         <ul>
+    //           <li v-for="(item, index) of items">
+    //             {{ index + 1 }} - {{ item }}
+    //             <a href="" v-on:click.prevent="$emit('hapuskelas', index)">hapus</a>
+    //           </li>
+    //         </ul>
+    //       </template>
+    //       <li v-else>Kelas Belum Tersedia.,</li>
+    //       </div>
+    //     `,
+    //     data: function () {
+    //         return {}
+    //     },
+    //     methods: {
+    //         submit: function (event) {
+    //             let text = event.target.value; // mendapat value dari element html
+    //             // this.kelas.push(text); // push() add data baru di js, sifat nya add di akhir array
+    //             this.kelas.unshift(this.kelasBaru); // unshift() add data baru di js, sifat nya add di awal array
+    //             this.kelasBaru = ""; // akan render kosong ketika memulai input baru
+    //         }
+    //     }
+    // });
+
+    // data
+    const member = {
+        kelas: ["Java", "Golang", "Javacript", "PHP"],
+        kelasBaru: ""
+    }; // set data
+
+    const Home = {
+        template: "<div>HOME</div>"
+    }
+
+    const About = {
+        template: "<div>ABOUT</div>"
+    }
+
+    const Kelas = {
         props: ["items", "input"],
         template: `
           <div>
           <h3>Tambah Kelas.</h3>
-          <p><input type="text" placeholder="Nama Kelas" v-on:keyup.enter="$emit('submitkelas', $event)" ></p>
+          <p><input type="text" placeholder="Nama Kelas" v-on:keyup.enter="$emit('submitkelas', $event)"></p>
 
           <hr>
           <h3>Total Kelas {{ items.length }}</h3>
@@ -135,9 +198,7 @@
           </div>
         `,
         data: function () {
-            return {
-
-            }
+            return {}
         },
         methods: {
             submit: function (event) {
@@ -147,23 +208,27 @@
                 this.kelasBaru = ""; // akan render kosong ketika memulai input baru
             }
         }
-    });
-
-    // data
-    const member = {
-        kelas: ["Java", "Golang", "Javacript", "PHP"],
-        kelasBaru: ""
-    }; // set data
-
-    const Home = {
-        template: "<div>HOME</div>"
     }
+
+    // config Route url. sebagai halaman
+    const routes = [
+        {path: "/", component: Home},
+        {path: "/about", component: About},
+        {path: "/kelas", component: Kelas}
+    ];
+
+    // registration vue route. lalu instance ke object Vue
+    const router = new VueRouter({
+        routes // short for `routes: routes`
+    });
 
     // object vue js
     const vm = new Vue({
         el: "#app",
+        router,
         components: {
-          "home": Home
+            "home": Home,
+            "about": About
         },
         data: member,
         methods: {
@@ -171,7 +236,7 @@
                 // console.info(`${index}`);
                 this.kelas.splice(index, 1); // akses component class lalu splice(cari index, 1(hapus 1 elemet dari array tersebut))
             },
-            submitkelas: function (event){
+            submitkelas: function (event) {
                 // console.info(event);
                 const text = event.target.value; // get value text dari component child
                 this.kelas.unshift(text); // unshift() add array dari depan
