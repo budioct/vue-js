@@ -23,7 +23,9 @@
 <div id="app">
 
     <!-- memangil component yang sudah di buat vue js-->
-    <header-component></header-component>
+    <header-component nama="Vuejs" gambar="image/logo.png"></header-component>
+    <header-component nama="lfc" gambar="image/lfc.png"></header-component>
+    <header-component nama="lfc" gambar="image/vue.png"></header-component>
 
     <main>
         <!-- memangil component yang sudah di buat vue js-->
@@ -66,14 +68,20 @@
      * component di buat untuk menyimpan template html, lalu di reader ke dalam satu env element # vue js
      * component juga bisa mengirim data, dengan kaidanya key data harus value method, lalu di dalam method tersebu bisa return object{}
      * note: components yang telah dibuat cara membuatnya harus sebelum instance object id #app supaya bisa di tampilkan/reader oleh instance Object vue id=app
+     *
+     * props adalah parsing data dari child component, costume attribute yang bisa di daftarkan pada suatu component, pada suatu value yang di kirimkan ke prosp maka value tersebut menjadi child component
+     *
      */
 
     // membuat component(param, object)
     Vue.component("header-component", {
+        props: ["nama", "gambar"],
         template: `
           <header>
-          <img src="image/logo.png" width="100">
+<!--          <img src="image/logo.png" width="100">-->
+          <img v-bind:src="gambar" width="100">
 
+          <p>{{ "Hello " + nama }}</p>
           <p>The Progressive JavaScript Framework</p>
           <p>{{ pesan }}</p>
           </header>
