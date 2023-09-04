@@ -74,6 +74,8 @@
      * component pada vue js merupakan sebuah object vue js instance yang dapat digunakan sebagai fungsi untuk menyimpan vue tamplate dan fungsi tamplate bisa di panggil berkali kali
      * menerapkan component yang sederhana..
      * component di buat untuk menyimpan template html, lalu di reader ke dalam satu env element # vue js
+     * component juga bisa mengirim data, dengan kaidanya key data harus value method, lalu di dalam method tersebu bisa return object{}
+     * note: components yang telah dibuat cara membuatnya harus sebelum instance object id #app supaya bisa di tampilkan/reader oleh instance Object vue id=app
      */
 
         // data
@@ -85,12 +87,18 @@
     // membuat component(param, object)
     Vue.component("header-component", {
         template: `
-        <header>
-        <img src="image/logo.png" width="100">
+          <header>
+          <img src="image/logo.png" width="100">
 
-        <p>The Progressive JavaScript Framework</p>
-        </header>
-        `
+          <p>The Progressive JavaScript Framework</p>
+          <p>{{ pesan }}</p>
+          </header>
+        `,
+        data: function (){
+            return {
+                pesan: "Hello Component"
+            }
+        }
     });
 
     Vue.component("footer-component", {
