@@ -37,9 +37,9 @@
         </ul>
 
         <h3>Total Kelas {{kelas.length}}</h3>
-        <template>
+        <template v-if="kelas.length > 1">
             <!--  <ul v-show="kelas.length > 1">-->
-            <ul v-if="kelas.length > 1">
+            <ul>
                 <li v-for="(item, index) of kelas">{{index + 1}} - {{item}}</li>
             </ul>
             <li v-else>Kelas Belum Tersedia</li>
@@ -66,6 +66,16 @@
         <button v-bind:class="{active: menu === 'home'}" v-on:click="menu = 'home'">Home</button>
         <button v-bind:class="{active: menu === 'about'}" v-on:click="menu = 'about'"> About</button>
         <button v-bind:class="{active: menu === 'blog'}" v-on:click="menu = 'blog'">Blog</button>
+
+        <p>
+            <!-- studi kasus penggunaan object event-->
+            <!-- dalam penggunakan ini page link menu akan redirect/reload berarti ini sudah benar dalam implementasinya.-->
+            <!-- ini terjadi karena mempunya sifat bawaan dari element tag a. kita bisa menonaktigkan-->
+            <!-- kita bisa me-non-aktifkan sifat bawaan dari element html. dengan param tambahan $event di function-->
+            <a v-bind:class="{active: menu === 'home'}" href="#" v-on:click="gantiMenu('home', $event)">Home</a>
+            <a v-bind:class="{active: menu === 'about'}" href="#" v-on:click="gantiMenu('about', $event)"> About</a>
+            <a v-bind:class="{active: menu === 'blog'}" href="#" v-on:click="gantiMenu('blog', $event)">Blog</a>
+        </p>
     </header>
 
     <footer id="footer">
@@ -137,6 +147,11 @@
                 return param.filter(angka => {
                     return angka % 2 === 0
                 });
+            },
+            gantiMenu: function (param, event) {
+                event.preventDefault(); // preventDefault() mencegah fungsi element html di non-aktifkan. suapaya perintah vue js di eksekusi dengan baik.. tidak melakukan redirect/reload
+                console.info(event);
+                this.menu = param;
             }
         },
         computed: {

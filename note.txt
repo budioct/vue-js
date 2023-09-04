@@ -5,6 +5,7 @@ v-once = attribute supaya isi content tidak bisa di manipulasi
 v-text = binding object data pada vue / mendapatkan data
 v-html = mendapatkan data dan juga bisa menerima value bentuk element html --> link: "<a href=''>goal.com/id</a>"
 v-bind:src = mendapatkan resource file dari project.. set --> gambar: "image/vue.png", get --> v-bind:src="gambar"
+v-bind:class = kebutuhan umun untuk peningkatan data, seperti memanipulasi daftar kelas element dan style, dengan campur tanggal dalam penggabungan string
 v-on:click = digunakan event listener yang user lakukan, (javascript DOM)
 v-model = diguanakn untuk membuat biding data dengan dua arah.. digunakan pada element html input inputan lainya
 v-for = digunakan untuk loop statement array[] atau object{}.. kita bisa menggunakan forin atau forof
