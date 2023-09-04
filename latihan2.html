@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Biginners 2</title>
+    <link href='https://fonts.googleapis.com/css?family=Quicksand&display=swap' rel='stylesheet'>
+    <style>
+        body {
+            margin: 5%;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .active {
+            background: salmon;
+            border: 0;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- div ini akan menjadi wadah compoentn vue js-->
+<div id="app">
+
+    <!-- memangil component yang sudah di buat vue js-->
+    <header-component></header-component>
+
+    <main>
+        <h3>Tambah Kelas.</h3>
+        <p><input type="text" placeholder="Nama Kelas" v-on:keyup.enter="submit" v-model="kelasBaru"></p>
+
+        <hr>
+        <h3>Total Kelas {{kelas.length}}</h3>
+        <template v-if="kelas.length > 1">
+            <!--  <ul v-show="kelas.length > 1">-->
+            <ul>
+                <li v-for="(item, index) of kelas">{{index + 1}} - {{item}}</li>
+            </ul>
+            <li v-else>Kelas Belum Tersedia</li>
+        </template>
+    </main>
+
+    <!-- memangil component yang sudah di buat vue js-->
+    <footer-component></footer-component>
+</div>
+
+<!--<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+<script>
+    /**
+     * Vue Js code disini
+     * dalam object{} Vue
+     * key pertama el ==> yang menentukan element mana sebagai system component dari view nyaa.. akan kita jadikan wadah component
+     * untuk get id atau class dari wadah component.. id = #app atau class = .app
+     *
+     * key data untuk // string, number, boolean, array, object
+     * untuk mengakses data dari object vue di element html dengan interpolation/ekpression/mustache {{ key object}}
+     *
+     * key method untuk menaruh semua method pada object vue.. key word this. selalu mengacu pada object new Vue()
+     *
+     * computed property berbentuk method, value tergantung dari propery lainya.. intinya bisa mensederhanakan di dalam method
+     *
+     * directive adalah method2 yang di sediakan vue js, uniknya di tempelkan element html.. contoh salah satu: v-once, v-text , dan etc
+     * kelebihan directive kita bisa manipulasi setiap datanya dengan expression sperti contoh di bawah
+     * v-html="bilangan * 2" ==> 98
+     * v-html="name.toUpperCase()" ==> BUDHI OCT 22
+     *
+     * event adalah yang di lakukan seperti DOM Javascript
+     *
+     * two way data binding adalah menggunakan v-model untuk membuat biding data dengan dua arah.. digunakan element input input lainya
+     *
+     * element <template> adalah sebuah wrapper untuk mengkelompokan beberapa element html sekaligus. digunakan untuk kondisional
+     *
+     * component pada vue js merupakan sebuah object vue js instance yang dapat digunakan sebagai fungsi untuk menyimpan vue tamplate dan fungsi tamplate bisa di panggil berkali kali
+     * menerapkan component yang sederhana..
+     * component di buat untuk menyimpan template html, lalu di reader ke dalam satu env element # vue js
+     */
+
+        // data
+    const member = {
+            kelas: ["Java", "Golang", "Javacript", "PHP"],
+            kelasBaru: ""
+        }; // set data
+
+    // membuat component(param, object)
+    Vue.component("header-component", {
+        template: `
+        <header>
+        <img src="image/logo.png" width="100">
+
+        <p>The Progressive JavaScript Framework</p>
+        </header>
+        `
+    });
+
+    Vue.component("footer-component", {
+        template: `
+    <footer id="footer">
+        <p>copyright 2023</p>
+    </footer>
+        `
+    });
+
+    // object vue js
+    const vm = new Vue({
+        el: "#app",
+        data: member,
+        methods: {
+            submit: function (event) {
+                let text = event.target.value; // mendapat value dari element html
+                // this.kelas.push(text); // push() add data baru di js, sifat nya add di akhir array
+                this.kelas.unshift(this.kelasBaru); // unshift() add data baru di js, sifat nya add di awal array
+                this.kelasBaru = ""; // akan render kosong ketika memulai input baru
+            }
+        },
+        computed: {}
+    }); // instance
+
+</script>
+
+</body>
+</html>
