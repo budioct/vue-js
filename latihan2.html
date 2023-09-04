@@ -25,9 +25,9 @@
 
     <!-- memangil component yang sudah di buat vue js-->
     <header-component nama="Vuejs" gambar="image/logo.png"></header-component>
-<!--    <header-component nama="lfc" gambar="image/lfc.png"></header-component>-->
-<!--    <header-component nama="lfc" gambar="image/vue.png"></header-component>-->
-    
+    <!--    <header-component nama="lfc" gambar="image/lfc.png"></header-component>-->
+    <!--    <header-component nama="lfc" gambar="image/vue.png"></header-component>-->
+
     <nav>
         <!-- navbar yang sudah di set sedemikian yang sudah di set object VueRouter-->
         <router-link to="/">Home</router-link>
@@ -38,9 +38,9 @@
     <main>
         <!-- memangil component yang sudah di buat vue js-->
         <!-- menambahkan event berbentuk props.. ketika event listener maka akan redering $emit('hapusKelas') -->
-<!--        <kelas v-bind:items="kelas" v-on:submitkelas="submitkelas" v-on:hapuskelas="hapuskelas($event)"></kelas>-->
-<!--        <home></home>-->
-<!--        <about></about>-->
+        <!--        <kelas v-bind:items="kelas" v-on:submitkelas="submitkelas" v-on:hapuskelas="hapuskelas($event)"></kelas>-->
+        <!--        <home></home>-->
+        <!--        <about></about>-->
 
         <!-- akan menampilkan dan mencocokan dengan route url yang ada di registrasi-->
         <router-view v-bind:items="kelas" v-on:submitkelas="submitkelas" v-on:hapuskelas="hapuskelas($event)"></router-view>
@@ -164,7 +164,10 @@
 
     // data
     const member = {
-        kelas: ["Java", "Golang", "Javacript", "PHP"],
+        kelas: [
+            {id: 1, judul: "Vuejs", deskripsi: "progressive javescript framwork", gambar: "vue.png"},
+            {id: 2, judul: "Liverpool FC", deskripsi: "the club from english", gambar: "lfc.png"},
+        ],
         kelasBaru: ""
     }; // set data
 
@@ -189,8 +192,8 @@
             <!--  <ul v-show="kelas.length > 1">-->
             <ul>
               <li v-for="(item, index) of items">
-                {{ index + 1 }} - {{ item }}
-                <a href="" v-on:click.prevent="$emit('hapuskelas', index)">hapus</a>
+                {{ index + 1 }} - {{ item.judul }}
+                <a href="" v-on:click.prevent="$emit('hapuskelas', item.id)">hapus</a>
               </li>
             </ul>
           </template>
@@ -219,7 +222,7 @@
 
     // registration vue route. lalu instance ke object Vue
     const router = new VueRouter({
-        mode: "history", // supaya url lebih rapi. dan  tidak ada ===> #/ di akhir url
+        //mode: "history", // supaya url lebih rapi. dan  tidak ada ===> #/ di akhir url
         routes // short for `routes: routes`
     });
 
@@ -233,9 +236,11 @@
         },
         data: member,
         methods: {
-            hapuskelas: function (index) {
+            hapuskelas: function (id) {
                 // console.info(`${index}`);
-                this.kelas.splice(index, 1); // akses component class lalu splice(cari index, 1(hapus 1 elemet dari array tersebut))
+                // this.kelas.splice(index, 1); // akses component class lalu splice(cari index, 1(hapus 1 elemet dari array tersebut))
+                // console.info(`${id}`);
+                this.kelas = this.kelas.filter(item => item.id != id); // filter() // satu per satu id mana yang cocok, jika cocok maka akan kita hapus.
             },
             submitkelas: function (event) {
                 // console.info(event);
