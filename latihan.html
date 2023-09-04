@@ -25,7 +25,7 @@
         <img src="image/logo.png" width="80">
         <h1 v-text="name"></h1>
         <h3>Form Submit.</h3>
-        <input type="text" placeholder="Nama Kelas" v-on:keyup.enter="submit">
+        <input type="text" placeholder="Nama Kelas" v-on:keyup.enter="submit" v-model="kelasBaru">
 
         <h3>Perulangan (1-5)</h3>
         <ul>
@@ -123,7 +123,8 @@
             gambar: "image/vue.png",
             menu: "home",
             kelas: ["Java", "Golang", "Javacript", "PHP"],
-            numbers: [1, 2, 3, 4, 5]
+            numbers: [1, 2, 3, 4, 5],
+            kelasBaru : ""
         }; // set data
 
     // object vue js
@@ -155,8 +156,8 @@
             submit : function (event) {
                 let text = event.target.value; // mendapat value dari element html
                 // this.kelas.push(text); // push() add data baru di js, sifat nya add di akhir array
-                this.kelas.unshift(text); // unshift() add data baru di js, sifat nya add di awal array
-                event.target.value = ""; // akan render kosong ketika memulai input baru
+                this.kelas.unshift(this.kelasBaru); // unshift() add data baru di js, sifat nya add di awal array
+                this.kelasBaru = ""; // akan render kosong ketika memulai input baru
             }
         },
         computed: {
