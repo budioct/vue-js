@@ -43,7 +43,7 @@
         <!--        <about></about>-->
 
         <!-- akan menampilkan dan mencocokan dengan route url yang ada di registrasi-->
-        <router-view v-bind:items="kelas" v-on:submitkelas="submitkelas" v-on:hapuskelas="hapuskelas($event)"></router-view>
+        <router-view v-bind:items="kelas" v-on:submitkelas="submitkelas" v-on:hapuskelas="hapuskelas"></router-view>
     </main>
 
     <!-- memangil component yang sudah di buat vue js-->
@@ -56,7 +56,9 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
 <script src="https://unpkg.com/vue-router@3"></script>
 <script src="https://unpkg.com/vuex@3"></script>
-<script>
+<script type="module">
+    import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+    // console.log(uuidv4()); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
     /**
      * Vue Js code disini
      * dalam object{} Vue
@@ -183,8 +185,26 @@
         props: ["items", "input"],
         template: `
           <div>
-          <h3>Tambah Kelas.</h3>
-          <p><input type="text" placeholder="Nama Kelas" v-on:keyup.enter="$emit('submitkelas', $event)"></p>
+          <!--          <h3>Tambah Kelas.</h3>-->
+          <!--          <p><input type="text" placeholder="Nama Kelas" v-on:keyup.enter="$emit('submitkelas', $event)"></p>-->
+
+          <form v-on:submit.prevent="submitkelas">
+            <p><input type="text" v-model="kelas.judul" placeholder="Nama Kelas"></p>
+
+            <div class="input-group">
+              <label>Deskripsi: </label><br>
+              <textarea v-model="kelas.deskripsi" cols="30" rows="10"></textarea>
+            </div>
+
+            <div class="input-group">
+              <label>Masukan Gambar: </label><br>
+              <input type="file"/>
+            </div>
+            <br>
+
+            <button type="submit">Submit</button>
+          </form>
+
 
           <hr>
           <h3>Total Kelas {{ items.length }}</h3>
@@ -201,14 +221,27 @@
           </div>
         `,
         data: function () {
-            return {}
+            return {
+                kelas: {
+                    judul: "",
+                    deskripsi: "",
+                    gambar: ""
+                }
+            }
         },
         methods: {
-            submit: function (event) {
-                let text = event.target.value; // mendapat value dari element html
-                // this.kelas.push(text); // push() add data baru di js, sifat nya add di akhir array
-                this.kelas.unshift(this.kelasBaru); // unshift() add data baru di js, sifat nya add di awal array
-                this.kelasBaru = ""; // akan render kosong ketika memulai input baru
+            submitkelas: function () {
+                // console.info(this.kelas);
+                const data = {
+                    id: uuidv4(),
+                    judul: this.kelas.judul,
+                    deskripsi: this.kelas.deskripsi,
+                    gambar: null
+                }
+                this.$emit("submitkelas", data);
+
+                this.kelas.judul = "";
+                this.kelas.deskripsi = "";
             }
         }
     }
@@ -242,10 +275,10 @@
                 // console.info(`${id}`);
                 this.kelas = this.kelas.filter(item => item.id != id); // filter() // satu per satu id mana yang cocok, jika cocok maka akan kita hapus.
             },
-            submitkelas: function (event) {
-                // console.info(event);
-                const text = event.target.value; // get value text dari component child
-                this.kelas.unshift(text); // unshift() add array dari depan
+            submitkelas: function (data) {
+                console.info(data);
+                // const text = event.target.value; // get value text dari component child
+                this.kelas.unshift(data); // unshift() add array dari depan
             }
         },
         computed: {}
