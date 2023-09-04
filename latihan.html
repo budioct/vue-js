@@ -24,7 +24,8 @@
     <header>
         <img src="image/logo.png" width="80">
         <h1 v-text="name"></h1>
-        <input type="text" v-model="name">
+        <h3>Form Submit.</h3>
+        <input type="text" placeholder="Nama Kelas" v-on:keyup.enter="submit">
 
         <h3>Perulangan (1-5)</h3>
         <ul>
@@ -150,6 +151,12 @@
                 //event.preventDefault(); // preventDefault() mencegah fungsi element html di non-aktifkan. suapaya perintah vue js di eksekusi dengan baik.. tidak melakukan redirect/reload
                 //console.info(event);
                 this.menu = param;
+            },
+            submit : function (event) {
+                let text = event.target.value; // mendapat value dari element html
+                // this.kelas.push(text); // push() add data baru di js, sifat nya add di akhir array
+                this.kelas.unshift(text); // unshift() add data baru di js, sifat nya add di awal array
+                event.target.value = ""; // akan render kosong ketika memulai input baru
             }
         },
         computed: {
