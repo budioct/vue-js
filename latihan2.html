@@ -30,7 +30,8 @@
 
     <main>
         <!-- memangil component yang sudah di buat vue js-->
-        <kelas v-bind:items="kelas" :input="kelasBaru"/>
+        <kelas v-bind:items="kelas" :input="kelasBaru"> </kelas>
+        <home></home>
     </main>
 
     <!-- memangil component yang sudah di buat vue js-->
@@ -141,9 +142,16 @@
         kelasBaru: ""
     }; // set data
 
+    const Home = {
+        template: "<div>HOME</div>"
+    }
+
     // object vue js
     const vm = new Vue({
         el: "#app",
+        components: {
+          "home": Home
+        },
         data: member,
         methods: {},
         computed: {}
