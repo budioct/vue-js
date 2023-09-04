@@ -26,18 +26,8 @@
     <header-component></header-component>
 
     <main>
-        <h3>Tambah Kelas.</h3>
-        <p><input type="text" placeholder="Nama Kelas" v-on:keyup.enter="submit" v-model="kelasBaru"></p>
-
-        <hr>
-        <h3>Total Kelas {{kelas.length}}</h3>
-        <template v-if="kelas.length > 1">
-            <!--  <ul v-show="kelas.length > 1">-->
-            <ul>
-                <li v-for="(item, index) of kelas">{{index + 1}} - {{item}}</li>
-            </ul>
-            <li v-else>Kelas Belum Tersedia</li>
-        </template>
+        <!-- memangil component yang sudah di buat vue js-->
+        <kelas/>
     </main>
 
     <!-- memangil component yang sudah di buat vue js-->
@@ -78,12 +68,6 @@
      * note: components yang telah dibuat cara membuatnya harus sebelum instance object id #app supaya bisa di tampilkan/reader oleh instance Object vue id=app
      */
 
-        // data
-    const member = {
-            kelas: ["Java", "Golang", "Javacript", "PHP"],
-            kelasBaru: ""
-        }; // set data
-
     // membuat component(param, object)
     Vue.component("header-component", {
         template: `
@@ -94,7 +78,7 @@
           <p>{{ pesan }}</p>
           </header>
         `,
-        data: function (){
+        data: function () {
             return {
                 pesan: "Hello Component"
             }
@@ -109,10 +93,29 @@
         `
     });
 
-    // object vue js
-    const vm = new Vue({
-        el: "#app",
-        data: member,
+    Vue.component("kelas", {
+        template: `
+          <div>
+          <h3>Tambah Kelas.</h3>
+          <p><input type="text" placeholder="Nama Kelas" v-on:keyup.enter="submit" v-model="kelasBaru"></p>
+
+          <hr>
+          <h3>Total Kelas {{ kelas.length }}</h3>
+          <template v-if="kelas.length > 1">
+            <!--  <ul v-show="kelas.length > 1">-->
+            <ul>
+              <li v-for="(item, index) of kelas">{{ index + 1 }} - {{ item }}</li>
+            </ul>
+            <li v-else>Kelas Belum Tersedia</li>
+          </template>
+          </div>
+        `,
+        data: function () {
+            return {
+                kelas: ["Java", "Golang", "Javacript", "PHP"],
+                kelasBaru: ""
+            }
+        },
         methods: {
             submit: function (event) {
                 let text = event.target.value; // mendapat value dari element html
@@ -120,7 +123,17 @@
                 this.kelas.unshift(this.kelasBaru); // unshift() add data baru di js, sifat nya add di awal array
                 this.kelasBaru = ""; // akan render kosong ketika memulai input baru
             }
-        },
+        }
+    });
+
+    // data
+    const member = {}; // set data
+
+    // object vue js
+    const vm = new Vue({
+        el: "#app",
+        data: member,
+        methods: {},
         computed: {}
     }); // instance
 
