@@ -309,7 +309,7 @@
         template: `
           <div>
           <!--dengan uri-->
-<!--          <img v-bind:src="'image/' + detailKelas.gambar" width="200">-->
+          <!--          <img v-bind:src="'image/' + detailKelas.gambar" width="200">-->
           <!--dengan method-->
           <img v-bind:src="url_gambar(detailKelas.gambar)" width="200">
           <h3> {{ detailKelas.judul }} </h3>
@@ -331,7 +331,7 @@
                 let data = kelas.filter(k => k.id === id); // filter() // cek apakah id parsing cocok dengan yang di filter jika cocok simpan dalam variable
                 this.detailKelas = data[0];
             },
-            url_gambar: function (gambar){
+            url_gambar: function (gambar) {
                 return "../image/" + gambar; // lokasi gambar
             }
         }
