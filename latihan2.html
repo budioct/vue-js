@@ -111,6 +111,10 @@
      * router supaya kita bisa membuat signle page application
      *
      * localStorage adalah fitur html 5 yang sudah ada di dalam web browser. fitur ini menyimpan data sebelum ke database
+     * jika kita sudah submit form dan berhasil, ketika halamnya di refresh maka hasil form itu akan tersimpan di localstorage
+     * bagaimana kita bisa mengakses localstorage di browser untuk mengambil data tersebut
+     *
+     *
      */
 
     // membuat component(param, object)
@@ -177,10 +181,11 @@
 
     // data
     const member = {
-        kelas: [
-            {id: 1, judul: "Vuejs", deskripsi: "progressive javescript framwork", gambar: "vue.png"},
-            {id: 2, judul: "Liverpool FC", deskripsi: "the club from english", gambar: "lfc.png"},
-        ],
+        // kelas: [
+        //     {id: 1, judul: "Vuejs", deskripsi: "progressive javescript framwork", gambar: "vue.png"},
+        //     {id: 2, judul: "Liverpool FC", deskripsi: "the club from english", gambar: "lfc.png"},
+        // ],
+        kelas: [],
         kelasBaru: ""
     }; // set data
 
@@ -328,6 +333,10 @@
             "about": About
         },
         data: member,
+        created() {
+            // method create() ini secara otomatis akan di reader pada saat view nya di buat
+            this.kelas = JSON.parse(localStorage.getItem("kelas")) || []; // parse() konversi dari json ke object javascript // getItem(keyLocalStorage yang di simpan) mengakses localstorage yang ada di web browser
+        },
         methods: {
             hapuskelas: function (id) {
                 // console.info(`${index}`);
@@ -339,7 +348,7 @@
                 console.info(data);
                 // const text = event.target.value; // get value text dari component child
                 this.kelas.unshift(data); // unshift() add array dari depan
-                localStorage.setItem("kelas", JSON.stringify(this.kelas)); // akan di simpan ke local storage browser di key kelas
+                localStorage.setItem("kelas", JSON.stringify(this.kelas)); // stringify() konversi dari object javascript ke json // akan di simpan ke local storage browser di key kelas
             }
         },
         computed: {}
