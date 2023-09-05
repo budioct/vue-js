@@ -258,6 +258,10 @@
         },
         methods: {
             submitkelas: function () {
+                // setiap kali submit maka pesan error akan di hilangkan/replace, supaya tidak tersimpan di stack memory
+                this.error.judul = "";
+                this.error.deskripsi = "";
+
                 // cek validasi sebelum submit
                 if (this.kelas.judul === "") {
                     this.error.judul = "Judul is required";
@@ -269,21 +273,25 @@
                     // console.info(this.error.deskripsi);
                 }
 
-                // console.info(this.kelas);
-                const data = {
-                    id: uuidv4(),
-                    judul: this.kelas.judul,
-                    deskripsi: this.kelas.deskripsi,
-                    gambar: this.kelas.gambar
-                }
-                this.$emit("submitkelas", data);
+                // kondisi submit jika text sudah di isi maka lakukan
+                if (this.kelas.judul && this.kelas.deskripsi) {
+                    // console.info(this.kelas);
+                    const data = {
+                        id: uuidv4(),
+                        judul: this.kelas.judul,
+                        deskripsi: this.kelas.deskripsi,
+                        gambar: this.kelas.gambar
+                    }
+                    this.$emit("submitkelas", data); // proses submit
 
-                // kembalikan property menjadi kosong setelah submit form
-                this.kelas.judul = "";
-                this.kelas.deskripsi = "";
-                this.kelas.gambar = "";
-                this.previewimg = "";
-                this.$refs.gambar.value = ""; // akses attribut element ref="gambar"
+                    // kembalikan property menjadi kosong setelah submit form
+                    this.kelas.judul = "";
+                    this.kelas.deskripsi = "";
+                    this.kelas.gambar = "";
+                    this.previewimg = "";
+                    this.$refs.gambar.value = ""; // akses attribut element ref="gambar"
+                }
+
             },
             upload: function (event) {
                 // console.info(event.target.files[0]); // mendapat informasi file upload
