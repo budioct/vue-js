@@ -109,6 +109,8 @@
      * nanti di file component kita tinggal <slot></slot> untuk mengambil content menjadi bagian component
      *
      * router supaya kita bisa membuat signle page application
+     *
+     * localStorage adalah fitur html 5 yang sudah ada di dalam web browser. fitur ini menyimpan data sebelum ke database
      */
 
     // membuat component(param, object)
@@ -337,6 +339,7 @@
                 console.info(data);
                 // const text = event.target.value; // get value text dari component child
                 this.kelas.unshift(data); // unshift() add array dari depan
+                localStorage.setItem("kelas", JSON.stringify(this.kelas)); // akan di simpan ke local storage browser di key kelas
             }
         },
         computed: {}
