@@ -181,6 +181,10 @@
         template: "<div>ABOUT</div>"
     }
 
+    const NotFound = {
+        template: "<div>Halaman Tidak Ditemukan!!..</div>"
+    }
+
     const Kelas = {
         props: ["items", "input"],
         template: `
@@ -267,7 +271,8 @@
     const routes = [
         {path: "/", component: Home},
         {path: "/about", component: About},
-        {path: "/kelas", component: Kelas}
+        {path: "/kelas", component: Kelas},
+        {path: "*", component: NotFound}
     ];
 
     // registration vue route. lalu instance ke object Vue
