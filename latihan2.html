@@ -115,7 +115,10 @@
      * jika kita sudah submit form dan berhasil, ketika halamnya di refresh maka hasil form itu akan tersimpan di localstorage
      * bagaimana kita bisa mengakses localstorage di browser untuk mengambil data tersebut
      *
-     *
+     * lifecycle hooks adalah kemampuan  diberika akses untuk menambahkan kondisi tertentu.
+     * dengan membuat method di instance object vue. beforeCreate() => created() => mounted() => beforeUpdate() => updated()
+     * yang selalu di pangil: beforeCreate() => created() => mounted()  adalah awal di mana web pertama kali di jalankan/panggil
+     * setelah kita berpindah halaman atau url method beforeUpdate(), updated() baru di jalankan
      */
 
     // membuat component(param, object)
@@ -337,6 +340,19 @@
         created() {
             // method create() ini secara otomatis akan di reader pada saat view nya di buat
             this.kelas = JSON.parse(localStorage.getItem("kelas")) || []; // parse() konversi dari json ke object javascript // getItem(keyLocalStorage yang di simpan) mengakses localstorage yang ada di web browser
+            console.info("created");
+        },
+        beforeCreate(){
+            console.info("Before Created");
+        },
+        mounted(){
+            console.info("mounted");
+        },
+        beforeUpdate(){
+            console.info("beforeUpdate");
+        },
+        updated(){
+            console.info("updated");
         },
         methods: {
             hapuskelas: function (id) {
