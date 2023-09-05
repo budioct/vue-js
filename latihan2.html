@@ -65,6 +65,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
 <script src="https://unpkg.com/vue-router@3"></script>
 <script src="https://unpkg.com/vuex@3"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="module">
     import {v4 as uuidv4} from 'https://jspm.dev/uuid';
     // console.log(uuidv4()); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
@@ -345,10 +346,16 @@
                 this.kelas = this.kelas.filter(item => item.id != id); // filter() // satu per satu id mana yang cocok, jika cocok maka akan kita hapus.
             },
             submitkelas: function (data) {
-                console.info(data);
+                // console.info(data);
                 // const text = event.target.value; // get value text dari component child
                 this.kelas.unshift(data); // unshift() add array dari depan
                 localStorage.setItem("kelas", JSON.stringify(this.kelas)); // stringify() konversi dari object javascript ke json // akan di simpan ke local storage browser di key kelas
+
+                swal({
+                    title: this.kelas.judul,
+                    text: "Data Kelas Berhasil di simpan",
+                    icon: "success"
+                }); // notifikasi berhasil data di simpan dengan sweet Alert js
             }
         },
         computed: {}
