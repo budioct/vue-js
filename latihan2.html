@@ -15,6 +15,14 @@
             border: 0;
             padding: 5px;
         }
+
+        .error {
+            color: red;
+        }
+
+        .input-group {
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
@@ -34,6 +42,7 @@
         <router-link to="/about">About</router-link>
         <router-link to="/kelas">Kelas</router-link>
     </nav>
+    <br>
 
     <main>
         <!-- memangil component yang sudah di buat vue js-->
@@ -57,7 +66,7 @@
 <script src="https://unpkg.com/vue-router@3"></script>
 <script src="https://unpkg.com/vuex@3"></script>
 <script type="module">
-    import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+    import {v4 as uuidv4} from 'https://jspm.dev/uuid';
     // console.log(uuidv4()); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
     /**
      * Vue Js code disini
@@ -193,11 +202,15 @@
           <!--          <p><input type="text" placeholder="Nama Kelas" v-on:keyup.enter="$emit('submitkelas', $event)"></p>-->
 
           <form v-on:submit.prevent="submitkelas">
-            <p><input type="text" v-model="kelas.judul" placeholder="Nama Kelas"></p>
+            <div class="input-group">
+              <input type="text" v-model="kelas.judul" placeholder="Nama Kelas">
+              <div class="error" v-if="error.judul"><small>{{ error.judul }}</small></div>
+            </div>
 
             <div class="input-group">
               <label>Deskripsi: </label><br>
               <textarea v-model="kelas.deskripsi" cols="30" rows="10"></textarea>
+              <div class="error" v-if="error.deskripsi"><small>{{ error.deskripsi }}</small></div>
             </div>
 
             <div class="input-group">
@@ -236,11 +249,26 @@
                     deskripsi: "",
                     gambar: ""
                 },
-                previewimg: ""
+                previewimg: "",
+                error: {
+                    judul: "",
+                    deskripsi: ""
+                }
             }
         },
         methods: {
             submitkelas: function () {
+                // cek validasi sebelum submit
+                if (this.kelas.judul === "") {
+                    this.error.judul = "Judul is required";
+                    // console.info(this.error.judul);
+                }
+
+                if (this.kelas.deskripsi === "") {
+                    this.error.deskripsi = "Deskripsi is required";
+                    // console.info(this.error.deskripsi);
+                }
+
                 // console.info(this.kelas);
                 const data = {
                     id: uuidv4(),
@@ -257,12 +285,12 @@
                 this.previewimg = "";
                 this.$refs.gambar.value = ""; // akses attribut element ref="gambar"
             },
-            upload : function (event){
+            upload: function (event) {
                 // console.info(event.target.files[0]); // mendapat informasi file upload
                 const files = event.target.files[0]; // mendapat informasi file upload
                 const nameFile = event.target.files[0].name; // mendapat informasi file upload
                 this.kelas.gambar = nameFile; // set property
-                this.previewimg  = URL.createObjectURL(files); // set element html
+                this.previewimg = URL.createObjectURL(files); // set element html
             }
         }
     }
