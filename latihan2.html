@@ -236,6 +236,7 @@
                 <p>
                   {{ index + 1 }} - {{ item.judul }}
                   <a href="" v-on:click.prevent="$emit('hapuskelas', item.id)">hapus</a>
+                  <router-link :to="'/kelas/' + item.id">lihat kelas</router-link>
                 </p>
               </li>
             </ul>
@@ -304,11 +305,16 @@
         }
     }
 
+    const detailKelas = {
+        template: "<div>Hello Detail Kelas</div>",
+    }
+
     // config Route url. sebagai halaman
     const routes = [
         {path: "/", component: Home},
         {path: "/about", component: About},
         {path: "/kelas", component: Kelas},
+        {path: "/kelas/:id", component: detailKelas}, // : (titik dua) artinya ingin menunju dengan sebuah halaman dengan data
         {path: "*", component: NotFound}
     ];
 
