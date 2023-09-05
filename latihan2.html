@@ -179,16 +179,6 @@
     //     }
     // });
 
-    // data
-    const member = {
-        // kelas: [
-        //     {id: 1, judul: "Vuejs", deskripsi: "progressive javescript framwork", gambar: "vue.png"},
-        //     {id: 2, judul: "Liverpool FC", deskripsi: "the club from english", gambar: "lfc.png"},
-        // ],
-        kelas: [],
-        kelasBaru: ""
-    }; // set data
-
     const Home = {
         template: "<div>HOME</div>"
     }
@@ -323,6 +313,16 @@
         //mode: "history", // supaya url lebih rapi. dan  tidak ada ===> #/ di akhir url
         routes // short for `routes: routes`
     });
+
+    // data
+    const member = {
+        // kelas: [
+        //     {id: 1, judul: "Vuejs", deskripsi: "progressive javescript framwork", gambar: "vue.png"},
+        //     {id: 2, judul: "Liverpool FC", deskripsi: "the club from english", gambar: "lfc.png"},
+        // ],
+        kelas: [],
+        kelasBaru: ""
+    }; // set data
 
     // object vue js
     const vm = new Vue({
