@@ -306,7 +306,35 @@
     }
 
     const detailKelas = {
-        template: "<div>Hello Detail Kelas</div>",
+        template: `
+          <div>
+          <!--dengan uri-->
+<!--          <img v-bind:src="'image/' + detailKelas.gambar" width="200">-->
+          <!--dengan method-->
+          <img v-bind:src="url_gambar(detailKelas.gambar)" width="200">
+          <h3> {{ detailKelas.judul }} </h3>
+          <p>{{ detailKelas.deskripsi }}</p>
+          <router-link to="/kelas">kembali</router-link>
+          </div>`,
+        data() {
+            return {
+                detailKelas: {}
+            }
+        },
+        created() {
+            this.filterKelas();
+        },
+        methods: {
+            filterKelas() {
+                let kelas = JSON.parse(localStorage.getItem("kelas")); // mengambil data dari localstorage, konversi dari json ke object javascript
+                let id = this.$route.params.id; // get id dari route yang di parsing
+                let data = kelas.filter(k => k.id === id); // filter() // cek apakah id parsing cocok dengan yang di filter jika cocok simpan dalam variable
+                this.detailKelas = data[0];
+            },
+            url_gambar: function (gambar){
+                return "../image/" + gambar; // lokasi gambar
+            }
+        }
     }
 
     // config Route url. sebagai halaman
@@ -348,16 +376,16 @@
             this.kelas = JSON.parse(localStorage.getItem("kelas")) || []; // parse() konversi dari json ke object javascript // getItem(keyLocalStorage yang di simpan) mengakses localstorage yang ada di web browser
             console.info("created");
         },
-        beforeCreate(){
+        beforeCreate() {
             console.info("Before Created");
         },
-        mounted(){
+        mounted() {
             console.info("mounted");
         },
-        beforeUpdate(){
+        beforeUpdate() {
             console.info("beforeUpdate");
         },
-        updated(){
+        updated() {
             console.info("updated");
         },
         methods: {
