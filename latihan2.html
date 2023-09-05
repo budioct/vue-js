@@ -197,7 +197,8 @@
             </div>
 
             <div class="input-group">
-              <img :src="previewimg" v-if="previewimg" width="300" /><p></p>
+              <img :src="previewimg" v-if="previewimg" width="300"/>
+              <p></p>
               <label>Masukan Gambar: </label><br>
               <input type="file" ref="gambar" v-on:change="upload"/>
             </div>
@@ -213,8 +214,11 @@
             <!--  <ul v-show="kelas.length > 1">-->
             <ul>
               <li v-for="(item, index) of items">
-                {{ index + 1 }} - {{ item.judul }}
-                <a href="" v-on:click.prevent="$emit('hapuskelas', item.id)">hapus</a>
+                <img v-bind:src="'image/' + item.gambar" width="200">
+                <p>
+                  {{ index + 1 }} - {{ item.judul }}
+                  <a href="" v-on:click.prevent="$emit('hapuskelas', item.id)">hapus</a>
+                </p>
               </li>
             </ul>
           </template>
