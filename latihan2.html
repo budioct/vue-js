@@ -199,7 +199,7 @@
             <div class="input-group">
               <img :src="previewimg" v-if="previewimg" width="300" /><p></p>
               <label>Masukan Gambar: </label><br>
-              <input type="file" v-on:change="upload"/>
+              <input type="file" ref="gambar" v-on:change="upload"/>
             </div>
             <br>
 
@@ -242,8 +242,12 @@
                 }
                 this.$emit("submitkelas", data);
 
+                // kembalikan property menjadi kosong setelah submit form
                 this.kelas.judul = "";
                 this.kelas.deskripsi = "";
+                this.kelas.gambar = "";
+                this.previewimg = "";
+                this.$refs.gambar.value = ""; // akses attribut element ref="gambar"
             },
             upload : function (event){
                 // console.info(event.target.files[0]); // mendapat informasi file upload
