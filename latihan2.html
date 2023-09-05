@@ -344,6 +344,15 @@
                 // this.kelas.splice(index, 1); // akses component class lalu splice(cari index, 1(hapus 1 elemet dari array tersebut))
                 // console.info(`${id}`);
                 this.kelas = this.kelas.filter(item => item.id != id); // filter() // satu per satu id mana yang cocok, jika cocok maka akan kita hapus.
+
+                // setelah data di hapus maka keadaan array kosong. maka dari itu. this.kelas akan replace localstorage dengan value yang kosong
+                localStorage.setItem("kelas", JSON.stringify(this.kelas)); // replace local storage dengan value kosong
+
+                swal({
+                    text: "Data Kelas Berhasil dihapus",
+                    icon: "warning"
+                }); // notifikasi berhasil data di simpan dengan sweet Alert js
+
             },
             submitkelas: function (data) {
                 // console.info(data);
